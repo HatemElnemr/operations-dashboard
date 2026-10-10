@@ -3,7 +3,9 @@ export type OperationStatus = 'Pending' | 'Running' | 'Completed' | 'Failed';
 export interface Operation {
   id: string;
   name: string;
+  description: string;
   assignee: string;
+  role: string;
   status: OperationStatus;
   createdAt: string; // ISO String format
   updatedAt: string; // ISO String format

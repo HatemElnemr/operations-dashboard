@@ -77,8 +77,13 @@ export async function fetchOperations(
     return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
   });
 
+  // 7. تطبيق الـ Pagination ( slicing بعد الفلترة والترتيب )
+  const page = Math.max(1, params.page || 1);
+  const limit = Math.max(1, params.limit || 50);
+  const pagedData = data.slice((page - 1) * limit, page * limit);
+
   return {
-    data,
+    data: pagedData,
     total: data.length,
     stats,
   };

@@ -1,13 +1,20 @@
 import type { Operation, OperationStatus } from '../types/operation.types';
 
-const STORAGE_KEY = 'app_operations_data_v1';
+const STORAGE_KEY = 'app_operations_data_v2';
 
 const STATUSES: OperationStatus[] = ['Pending', 'Running', 'Completed', 'Failed'];
 
 const ASSIGNEES = [
-  'Ahmed Hassan', 'Sara Mohamed', 'Omar Khaled', 'Nour El-Din',
-  'Mona Zaki', 'Kareem Abdelaziz', 'Fatima Zahra', 'Youssef Ali',
-  'Layla Mahmoud', 'Tarek Ziad'
+  { name: 'Ahmed Hassan', role: 'Operations Lead' },
+  { name: 'Sara Mohamed', role: 'Finance Manager' },
+  { name: 'Omar Khaled', role: 'Compliance Officer' },
+  { name: 'Nour El-Din', role: 'Data Specialist' },
+  { name: 'Mona Zaki', role: 'People Operations' },
+  { name: 'Kareem Abdelaziz', role: 'Procurement Lead' },
+  { name: 'Fatima Zahra', role: 'Operations Lead' },
+  { name: 'Youssef Ali', role: 'Finance Manager' },
+  { name: 'Layla Mahmoud', role: 'Compliance Officer' },
+  { name: 'Tarek Ziad', role: 'Data Specialist' },
 ];
 
 const OPERATION_PREFIXES = [
@@ -47,14 +54,16 @@ export function generateInitialOperations(count: number = 5000): Operation[] {
     const name = `${getRandomItem(OPERATION_PREFIXES)} ${getRandomItem(OPERATION_SUFFIXES)}`;
     const assignee = getRandomItem(ASSIGNEES);
     const status = getRandomItem(STATUSES);
-    
+
     const createdDate = getRandomDate(pastYear, now);
     const updatedDate = getRandomDate(createdDate, now);
 
     operations.push({
       id,
       name,
-      assignee,
+      description: `${name} covering all dependent systems, with validation checkpoints and an exception-handling report delivered to the operations team.`,
+      assignee: assignee.name,
+      role: assignee.role,
       status,
       createdAt: createdDate.toISOString(),
       updatedAt: updatedDate.toISOString(),
